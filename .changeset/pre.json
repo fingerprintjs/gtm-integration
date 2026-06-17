@@ -1,5 +1,5 @@
 {
-  "mode": "pre",
+  "mode": "exit",
   "tag": "test",
   "initialVersions": {
     "@fingerprint/gtm-adapter": "1.1.0"
