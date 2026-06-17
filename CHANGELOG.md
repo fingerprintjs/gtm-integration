@@ -1,5 +1,26 @@
 # Fingerprint Google Tag Manager Template
 
+## 2.0.0
+
+### Major Changes
+
+- Switch to JS Agent v4 (`@fingerprint/agent`) in the GTM adapter. This is a breaking change.
+
+  - Replace the `load` wrapper with the new `start` wrapper, invoking `Fingerprint.start` rather than the JS agent v3 `load` function. See the [start reference page](https://docs.fingerprint.com/reference/js-agent-v4-start-function) for the options supported by `start`.
+  - `start` does not require a callback because it is a synchronous call, unlike `load`, which was asynchronous.
+  - Update the `get` wrapper to use the options from `Fingerprint.get` function internally. See the [get reference page](https://docs.fingerprint.com/reference/js-agent-v4-get-function) for the options supported by `get`. The definition for the return value from `get` can also be found on that page with the difference that `sealed_result`, when set, is a `string` rather than a `BinaryOutput`. ([b31c893](https://github.com/fingerprintjs/gtm-integration/commit/b31c893fafeac8d9b8eec9d12622fb62e2bc8dfc))
+
+- Update GTM template to support JS agent v4. This is a breaking change.
+  Because the template now uses a different contract for the GTM `dataLayer`, existing GTM tags that use the previous template cannot be updated in place. However, the changes do allow new tags to be created with this template that will not interfere with existing GTM tags.
+
+  - Update the `Tag type` parameter to use JS agent v4 terminology.
+  - Replace the `Script Url Pattern` and `Endpoint` parameters with the `Endpoints` table.
+  - Remove the `Extended result` parameter. It is no longer needed for JS agent v4.
+  - Change the default result name to `FingerprintResult` from `FingerprintJSProResult`.
+  - Rename custom event `FingerprintJSPro.loaded` to `Fingerprint.started`.
+  - Rename custom event `FingerprintJSPro.identified` to `Fingerprint.identified`.
+  - The result set in the GTM `dataLayer` uses the JS agent v4 result shape. See the [v4 get function documentation](https://docs.fingerprint.com/reference/js-agent-v4-get-function#get-response-fields) for details. ([78c1092](https://github.com/fingerprintjs/gtm-integration/commit/78c1092e994ed8abcb9169bb4a65517893313995))
+
 ## 2.0.0-test.1
 
 ### Patch Changes
