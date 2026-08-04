@@ -65,7 +65,7 @@ pnpm lint:fix
 
 ### How to test
 
-Tests are located in `__tests__` folder and run by [jest](https://jestjs.io/) in [jsdom](https://github.com/jsdom/jsdom) environment.
+Tests are located in `__tests__` folder and run by [Vitest](https://vitest.dev/) in [jsdom](https://github.com/jsdom/jsdom) environment.
 
 To run tests you can use IDE instruments or just run:
 ```shell
@@ -101,7 +101,7 @@ When adding new features, remember to provide tests that can be run inside the t
 
 ### Updating the template
 
-After a new GitHub release is published, the [update-gtm-metadata](.github/workflows/update-gtm-metadata.yaml) workflow will open a PR
+After a new GitHub release is published, the [update-gtm-metadata](.github/workflows/update-gtm-metadata.yml) workflow will open a PR
 to update the [metadata.yaml](metadata.yaml) file with details from the latest release.
 
 [Read more about updating templates](https://developers.google.com/tag-platform/tag-manager/templates/gallery#update_your_template)

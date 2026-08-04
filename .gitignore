@@ -2,9 +2,13 @@
 /dist/
 /node_modules/
 
+# Test/coverage output
+/coverage/
+/report.json
+
 
 # Random excess stuff
 .DS_Store
 .idea/
 .vscode/
-yarn-error.log
+*-debug.log
