@@ -19,6 +19,20 @@ jobs:
         with:
           fetch-depth: 0
 
+      # Install pnpm first so its version comes from the `packageManager` field
+      # in package.json, and so setup-node can use its pnpm cache below.
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6
+
+      - name: Install Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
       - name: Update GTM metadata
         env:
           # github.ref_name is the tag name for the triggering event
