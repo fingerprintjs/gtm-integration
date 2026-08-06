@@ -8,7 +8,7 @@ type Metadata = {
 }
 
 async function main() {
-  const metadataPath = path.resolve(__dirname, '../metadata.yaml')
+  const metadataPath = path.resolve(import.meta.dirname, '../metadata.yaml')
   const metadata: Metadata = yaml.parse(fs.readFileSync(metadataPath).toString())
 
   const args = process.argv.slice(2)
