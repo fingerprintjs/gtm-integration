@@ -12,7 +12,7 @@ export type SandboxSafeGetResult = Omit<Fingerprint.GetResult, 'sealed_result'> 
 export const get = (
   getOptions: Fingerprint.GetOptions,
   onFulfilled: (result: SandboxSafeGetResult) => void,
-  onRejected: (reason: any) => void
+  onRejected: (reason: unknown) => void
 ) => {
   if (!agent) {
     throw new Error('Call start method first')

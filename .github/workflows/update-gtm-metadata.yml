@@ -15,15 +15,29 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
+
+      # Install pnpm first so its version comes from the `packageManager` field
+      # in package.json, and so setup-node can use its pnpm cache below.
+      - name: Install pnpm
+        uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
+
+      - name: Install Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
       - name: Update GTM metadata
         env:
           # github.ref_name is the tag name for the triggering event
           GITHUB_REF_NAME: ${{ github.ref_name }}
-        run: pnpm exec tsx scripts/updateMetadata "$GITHUB_REF_NAME"
+        run: node scripts/updateMetadata.mts "$GITHUB_REF_NAME"
 
       - name: Create Pull Request
         id: create_pr
